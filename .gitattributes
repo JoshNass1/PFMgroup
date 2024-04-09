@@ -1,25 +1,54 @@
 from datetime import date
 
 class PersonalFinanceManager:
+   """Manages personal finance records.
+    Attributes:
+        expenses (list of dict): A list where each entry is a dictionary representing an expense record.
+        incomes (list of dict): A list where each entry is a dictionary representing an income record.
+        budgets (dict): A dictionary to store budget information, not yet implemented.
+    """
     def __init__(self):
+        """Initializes a PFM instance with empty records."""
+
         self.expenses = []
         self.incomes = []
         self.budgets = {}
      
-
     def log_expense(self, amount, category):
+      """Logs a new expense record.
+
+        Args:
+            amount (float): The amount of money spent.
+            category (str): The category of the expense.
+        """
         self.expenses.append({'date': date.today(), 'amount': amount, 'category': category})
 
     def log_income(self, amount, source):
+        """Logs a new income record.
+
+        Args:
+            amount (float): The amount of money earned.
+            source (str): The source of the income.
+        """
         self.incomes.append({'date': date.today(), 'amount': amount, 'source': source})
 
     def get_financial_summary(self):
+        """Calculates the total expenses and total income.
+
+        Returns:
+            tuple: A tuple containing total expenses and total income.
+        """
         total_expenses = sum(expense['amount'] for expense in self.expenses)
         total_income = sum(income['amount'] for income in self.incomes)
         return total_expenses, total_income
 
     @classmethod
     def input_expenses(cls, pfm):
+       """Logs an income record from user input.
+
+        Args:
+            pfm (PersonalFinanceManager): The instance of PFM to log income to.
+        """
         while True:
             item = input("What did you buy today? If nothing, type NOTHING: ")
             if item.upper() == "NOTHING":
@@ -29,11 +58,21 @@ class PersonalFinanceManager:
 
     @classmethod
     def input_income(cls, pfm):
+        """Logs an income record from user input.
+
+        Args:
+            pfm (PersonalFinanceManager): The instance of PFM to log income to.
+        """
         amount = float(input("How much did you make today? "))
         pfm.log_income(amount, 'income')
 
     @staticmethod
     def view_financial_summary(pfm):
+        """Prints a financial summary including total expenses, total income, and net profit/loss.
+
+        Args:
+            pfm (PersonalFinanceManager): The instance of PFM to summarize.
+        """
         total_expenses, total_income = pfm.get_financial_summary()
         net = total_income - total_expenses
         print(f"\nTotal Expenses: {total_expenses}")
@@ -41,6 +80,7 @@ class PersonalFinanceManager:
         print(f"Net Profit/Loss: {net}")
 
 def main():
+    """Main function to create a PFM instance and interact with the user to log and view financial records.""" 
     pfm = PersonalFinanceManager()
 
     PersonalFinanceManager.input_expenses(pfm)
