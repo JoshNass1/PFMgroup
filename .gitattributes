@@ -1,2 +1,52 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+from datetime import date
+
+class PersonalFinanceManager:
+    def __init__(self):
+        self.expenses = []
+        self.incomes = []
+        self.budgets = {}
+     
+
+    def log_expense(self, amount, category):
+        self.expenses.append({'date': date.today(), 'amount': amount, 'category': category})
+
+    def log_income(self, amount, source):
+        self.incomes.append({'date': date.today(), 'amount': amount, 'source': source})
+
+    def get_financial_summary(self):
+        total_expenses = sum(expense['amount'] for expense in self.expenses)
+        total_income = sum(income['amount'] for income in self.incomes)
+        return total_expenses, total_income
+
+    @classmethod
+    def input_expenses(cls, pfm):
+        while True:
+            item = input("What did you buy today? If nothing, type NOTHING: ")
+            if item.upper() == "NOTHING":
+                break
+            amount = float(input(f"How much was {item}? "))
+            pfm.log_expense(amount, item)
+
+    @classmethod
+    def input_income(cls, pfm):
+        amount = float(input("How much did you make today? "))
+        pfm.log_income(amount, 'income')
+
+    @staticmethod
+    def view_financial_summary(pfm):
+        total_expenses, total_income = pfm.get_financial_summary()
+        net = total_income - total_expenses
+        print(f"\nTotal Expenses: {total_expenses}")
+        print(f"Total Income: {total_income}")
+        print(f"Net Profit/Loss: {net}")
+
+def main():
+    pfm = PersonalFinanceManager()
+
+    PersonalFinanceManager.input_expenses(pfm)
+    PersonalFinanceManager.input_income(pfm)
+    PersonalFinanceManager.view_financial_summary(pfm)
+
+if __name__ == "__main__":
+    main()
+
