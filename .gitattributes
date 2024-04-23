@@ -52,7 +52,18 @@ class PersonalFinanceManager:
          """
          - self.budget[category] = amount
 
-  "ADD HERE"
+  def update_budget(self, category, new_amount):
+        """
+        Update the budget amount for the given category.
+
+        Parameters:
+        - category (str): The category or type for which the budget is updated.
+        - new_amount (float): The new budget amount.
+        """
+        if category in self.budgets:
+            self.budgets[category] = new_amount
+        else:
+            print(f"No budget set for {category}.")
 
     @classmethod
     def input_expenses(cls, pfm):
