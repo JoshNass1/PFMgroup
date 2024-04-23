@@ -42,6 +42,18 @@ class PersonalFinanceManager:
         total_income = sum(income['amount'] for income in self.incomes)
         return total_expenses, total_income
 
+     def add_budget ( self, category, amount):
+         """
+          Add or updates a budget for the given category.
+
+           Parameters:
+         - category (str); The category or type for which the budget is set.
+         - amount (float): The budget amount.
+         """
+         - self.budget[category] = amount
+
+  "ADD HERE"
+
     @classmethod
     def input_expenses(cls, pfm):
        """Logs an income record from user input.
