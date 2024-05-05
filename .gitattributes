@@ -14,7 +14,7 @@ class PersonalFinanceManager:
         self.incomes = []
         self.budgets = {}
      
-    def log_expense(self, amount, category):
+    def log_expense(self, amount, category): #2
       """Logs a new expense record.
 
         Args:
@@ -32,7 +32,7 @@ class PersonalFinanceManager:
         """
         self.incomes.append({'date': date.today(), 'amount': amount, 'source': source})
 
-    def get_financial_summary(self):
+    def get_financial_summary(self): #3
         """Calculates the total expenses and total income.
 
         Returns:
@@ -42,7 +42,7 @@ class PersonalFinanceManager:
         total_income = sum(income['amount'] for income in self.incomes)
         return total_expenses, total_income
 
-     def add_budget ( self, category, amount):
+     def add_budget ( self, category, amount): #4
          """
           Add or updates a budget for the given category.
 
@@ -66,7 +66,7 @@ class PersonalFinanceManager:
             print(f"No budget set for {category}.")
 
     @classmethod
-    def input_expenses(cls, pfm):
+    def input_expenses(cls, pfm): #5
        """Logs an income record from user input.
 
         Args:
@@ -80,7 +80,7 @@ class PersonalFinanceManager:
             pfm.log_expense(amount, item)
 
     @classmethod
-    def input_income(cls, pfm):
+    def input_income(cls, pfm): #5
         """Logs an income record from user input.
 
         Args:
@@ -90,7 +90,7 @@ class PersonalFinanceManager:
         pfm.log_income(amount, 'income')
 
     @staticmethod
-    def view_financial_summary(pfm):
+    def view_financial_summary(pfm): #6
         """Prints a financial summary including total expenses, total income, and net profit/loss.
 
         Args:
