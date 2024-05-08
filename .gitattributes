@@ -117,7 +117,7 @@ class PersonalFinanceManager:
            pfm.log_income(amount, name, source)
       except ValueError:
            print ("Please enter a valid amount!")
-
+####### START HERE #############################################################################################
     @staticmethod
     def view_financial_summary(pfm): #6
         """Prints a financial summary including total expenses, total income, and net profit/loss.
