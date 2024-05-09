@@ -7,7 +7,7 @@ class PersonalFinanceManager:
         incomes (list of dict): A list where each entry is a dictionary representing an income record.
         budgets (dict): A dictionary to store budget information, not yet implemented.
     """
-def __init__(self):
+   def __init__(self):
         """Initializes a PFM instance with empty records."""
 
         self.expenses = []
@@ -15,7 +15,7 @@ def __init__(self):
         self.budgets = {}
         self.savings_goals = {}
      
-def log_expense(self, amount, name, category): #2
+   def log_expense(self, amount, name, category): #2
       """Logs a new expense record.
 
         Args:
@@ -25,7 +25,7 @@ def log_expense(self, amount, name, category): #2
         """
         self.expenses.append({'date': date.today(), 'amount': amount, 'name': name, 'category': category})
 
-def log_income(self, amount, name, source):
+   def log_income(self, amount, name, source):
         """Logs a new income record.
 
         Args:
@@ -35,7 +35,7 @@ def log_income(self, amount, name, source):
         """
         self.incomes.append({'date': date.today(), 'amount': amount, 'name': name, 'source': source})
 
-def get_financial_summary(self, currency_rate=1): #3
+   def get_financial_summary(self, currency_rate=1): #3
         """Calculates the total expenses, total income, and net profit/loss.
          Parameters:
              currency_rate (float, optional): The currency exchange rate for conversion. Defaults to 1.
@@ -47,7 +47,7 @@ def get_financial_summary(self, currency_rate=1): #3
         net = total_income - total_expenses
         return total_expenses, total_income, net
 
-def add_budget (self, category, amount): #4
+   def add_budget (self, category, amount): #4
          """Adds or updates a budget for a given category.
          Parameters:
              category (str): The category for the budget.
@@ -55,7 +55,7 @@ def add_budget (self, category, amount): #4
         """
          self.budgets[category] = amount
 
-def update_budget(self, category, new_amount):
+   def update_budget(self, category, new_amount):
          """Updates the budget amount for a specific category.
          Parameters:
              category (str): The category to update.
@@ -66,7 +66,7 @@ def update_budget(self, category, new_amount):
         else:
             print(f"No budget set for {category}.")
  
-def delete_record (self, record_type, name):
+   def delete_record (self, record_type, name):
       """Deletes a record based on its type and name.
          Parameters:
              record_type (str): The type of record ('expense' or 'income').
@@ -79,8 +79,8 @@ def delete_record (self, record_type, name):
       else:
           print("invalid  record type.")
 
-    @classmethod
-def input_expenses(cls, pfm): #5
+   @classmethod
+   def input_expenses(cls, pfm): #5
        """Prompts the user to input expenses and logs them."""
         while True:
             name = input("Enter the name of the expense? If nothing, (type 'NOTHING' to stop): ")
@@ -93,8 +93,8 @@ def input_expenses(cls, pfm): #5
             except ValueError:
                print ("please enter a valid amount!")
 
-    @classmethod
-def input_income(cls, pfm): #5
+   @classmethod
+   def input_income(cls, pfm): #5
         """Logs an income record from user input.
 
         Args:
@@ -111,8 +111,8 @@ def input_income(cls, pfm): #5
             except ValueError:
                 print("Please enter a valid amount.")
 ####### START HERE  everything above this line is complete###########################################################################################
-    @staticmethod
-def view_financial_summary(pfm): #6
+   @staticmethod
+   def view_financial_summary(pfm): #6
         """Prints a financial summary including total expenses, total income, and net profit/loss.
 
         Args:
@@ -124,8 +124,8 @@ def view_financial_summary(pfm): #6
         print(f"Total Income: {total_income}")
         print(f"Net Profit/Loss: {net}")
 
-@staticmethod
-def manage_budget(pfm):
+   @staticmethod
+   def manage_budget(pfm):
         """
         Manage budgets by adding or updating budget amounts for categories.
 
@@ -153,8 +153,8 @@ def manage_budget(pfm):
             else:
                 print("Invalid option. Please try again.")
 
-    @staticmethod
-def manage_records(pfm):
+   @staticmethod
+   def manage_records(pfm):
         """
         Manage records by deleting expenses or incomes based on the name.
 
@@ -180,7 +180,7 @@ def manage_records(pfm):
             else:
                 print("Invalid option. Please try again.")
 
-def main():
+   def main():
     """Main function to run the Personal Finance Manager."""
     pfm = PersonalFinanceManager()
 
