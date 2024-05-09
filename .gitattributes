@@ -7,7 +7,7 @@ class PersonalFinanceManager:
         incomes (list of dict): A list where each entry is a dictionary representing an income record.
         budgets (dict): A dictionary to store budget information, not yet implemented.
     """
-   def __init__(self):
+def __init__(self):
         """Initializes a PFM instance with empty records."""
 
         self.expenses = []
@@ -15,67 +15,63 @@ class PersonalFinanceManager:
         self.budgets = {}
         self.savings_goals = {}
      
-   def log_expense(self, amount, name, category): #2
+def log_expense(self, amount, name, category): #2
       """Logs a new expense record.
 
         Args:
             amount (float): The amount of money spent.
+            name (str): The name or description of the expense.
             category (str): The category of the expense.
         """
         self.expenses.append({'date': date.today(), 'amount': amount, 'name': name, 'category': category})
-   def log_income(self, amount,name, source):
+
+def log_income(self, amount, name, source):
         """Logs a new income record.
 
         Args:
             amount (float): The amount of money earned.
-            source (str): The source of the income.
+            name (str): The name or description of the income.
             source (str): The source or origin of the income.
         """
         self.incomes.append({'date': date.today(), 'amount': amount, 'name': name, 'source': source})
 
-   def get_financial_summary(self, currency_rate=1): #3
-        """Calculates the total expenses and total income, and net profit/loss in the specified currency.
-        Parameters:
-      - currency_rate (float, optional): The currency exchange rate for conversion (default is 1).
-   
-        Returns:
-            tuple: A tuple containing total expenses and total income, and net profit/loss.
+def get_financial_summary(self, currency_rate=1): #3
+        """Calculates the total expenses, total income, and net profit/loss.
+         Parameters:
+             currency_rate (float, optional): The currency exchange rate for conversion. Defaults to 1.
+         Returns:
+             tuple: A tuple containing total expenses, total income, and net profit/loss.
         """
         total_expenses = sum(expense['amount'] * currency_rate for expense in self.expenses)
         total_income = sum(income['amount'] * currency_rate for income in self.incomes)
         net = total_income - total_expenses
         return total_expenses, total_income, net
 
-   def add_budget (self, category, amount): #4
-         """
-          Add or updates a budget for the given category.
-
-           Parameters:
-         - category (str); The category or type for which the budget is set.
-         - amount (float): The budget amount.
-         """
+def add_budget (self, category, amount): #4
+         """Adds or updates a budget for a given category.
+         Parameters:
+             category (str): The category for the budget.
+             amount (float): The budget amount.
+        """
          self.budgets[category] = amount
 
-  def update_budget(self, category, new_amount):
-        """
-        Update the budget amount for the given category.
-
-        Parameters:
-        - category (str): The category or type for which the budget is updated.
-        - new_amount (float): The new budget amount.
+def update_budget(self, category, new_amount):
+         """Updates the budget amount for a specific category.
+         Parameters:
+             category (str): The category to update.
+             new_amount (float): The new budget amount.
         """
         if category in self.budgets:
             self.budgets[category] = new_amount
         else:
             print(f"No budget set for {category}.")
- def delete_record (self, record_type, name):
-      """
-      Delete a record (expense or income) with the given name.
-
-      Parameters:
-    - record_type (str) : the type of record to delete ('expense' or 'income').
-    - name (str): the name or description of the record to delete.
-      """
+ 
+def delete_record (self, record_type, name):
+      """Deletes a record based on its type and name.
+         Parameters:
+             record_type (str): The type of record ('expense' or 'income').
+             name (str): The name of the record to delete.
+        """
       if record_type == 'expense':
          self.expenses = [expense for expense in self.expenses if expense['name'] != name]
       elif record_type == 'income' :
@@ -84,13 +80,8 @@ class PersonalFinanceManager:
           print("invalid  record type.")
 
     @classmethod
-   def input_expenses(cls, pfm): #5
-       """
-      prompts the user input expenses. 
-
-        Args:
-            pfm (PersonalFinanceManager): The instance of PFM to log expenses.
-        """
+def input_expenses(cls, pfm): #5
+       """Prompts the user to input expenses and logs them."""
         while True:
             name = input("Enter the name of the expense? If nothing, (type 'NOTHING' to stop): ")
             if name.upper() == "NOTHING":
@@ -103,22 +94,25 @@ class PersonalFinanceManager:
                print ("please enter a valid amount!")
 
     @classmethod
-    def input_income(cls, pfm): #5
+def input_income(cls, pfm): #5
         """Logs an income record from user input.
 
         Args:
             pfm (PersonalFinanceManager): The instance of PFM to log income to.
         """
-       try:
-           name = input ("Enter the name of the income: ") 
-           amount = float(input(f"How much was {name}? "))
-           source = input("what was the source of income? ")
-           pfm.log_income(amount, name, source)
-      except ValueError:
-           print ("Please enter a valid amount!")
+        while True:
+            name = input("Enter the name of the income (type 'NOTHING' to stop): ")
+            if name.upper() == "NOTHING":
+                break
+            try:
+                amount = float(input(f"How much was {name}? "))
+                source = input("What was the source of the income? ")
+                pfm.log_income(amount, name, source)
+            except ValueError:
+                print("Please enter a valid amount.")
 ####### START HERE  everything above this line is complete###########################################################################################
     @staticmethod
-    def view_financial_summary(pfm): #6
+def view_financial_summary(pfm): #6
         """Prints a financial summary including total expenses, total income, and net profit/loss.
 
         Args:
@@ -131,7 +125,7 @@ class PersonalFinanceManager:
         print(f"Net Profit/Loss: {net}")
 
 @staticmethod
-    def manage_budget(pfm):
+def manage_budget(pfm):
         """
         Manage budgets by adding or updating budget amounts for categories.
 
@@ -160,7 +154,7 @@ class PersonalFinanceManager:
                 print("Invalid option. Please try again.")
 
     @staticmethod
-    def manage_records(pfm):
+def manage_records(pfm):
         """
         Manage records by deleting expenses or incomes based on the name.
 
