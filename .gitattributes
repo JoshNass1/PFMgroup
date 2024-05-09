@@ -131,6 +131,62 @@ class PersonalFinanceManager:
         print(f"Total Income: {total_income}")
         print(f"Net Profit/Loss: {net}")
 
+@staticmethod
+    def manage_budget(pfm):
+        """
+        Manage budgets by adding or updating budget amounts for categories.
+
+        Parameters:
+        - pfm (PersonalFinanceManager): The PersonalFinanceManager instance to manage budgets.
+        """
+        while True:
+            print("\nBudget Management")
+            print("1. Add Budget")
+            print("2. Update Budget")
+            print("3. Back to Main Menu")
+
+            choice = input("Select an option: ")
+
+            if choice == "1":
+                category = input("Enter the category: ")
+                amount = float(input("Enter the budget amount: "))
+                pfm.add_budget(category, amount)
+            elif choice == "2":
+                category = input("Enter the category to update: ")
+                amount = float(input("Enter the new budget amount: "))
+                pfm.update_budget(category, amount)
+            elif choice == "3":
+                break
+            else:
+                print("Invalid option. Please try again.")
+
+    @staticmethod
+    def manage_records(pfm):
+        """
+        Manage records by deleting expenses or incomes based on the name.
+
+        Parameters:
+        - pfm (PersonalFinanceManager): The PersonalFinanceManager instance to manage records.
+        """
+        while True:
+            print("\nRecord Management")
+            print("1. Delete Expense")
+            print("2. Delete Income")
+            print("3. Back to Main Menu")
+
+            choice = input("Select an option: ")
+
+            if choice == "1":
+                name = input("Enter the name of the expense to delete: ")
+                pfm.delete_record('expense', name)
+            elif choice == "2":
+                name = input("Enter the name of the income to delete: ")
+                pfm.delete_record('income', name)
+            elif choice == "3":
+                break
+            else:
+                print("Invalid option. Please try again.")
+
 def main():
     """Main function to create a PFM instance and interact with the user to log and view financial records.""" 
     pfm = PersonalFinanceManager()
