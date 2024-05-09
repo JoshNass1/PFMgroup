@@ -188,13 +188,37 @@ class PersonalFinanceManager:
                 print("Invalid option. Please try again.")
 
 def main():
-    """Main function to create a PFM instance and interact with the user to log and view financial records.""" 
+    """Main function to run the Personal Finance Manager."""
     pfm = PersonalFinanceManager()
 
-    PersonalFinanceManager.input_expenses(pfm)
-    PersonalFinanceManager.input_income(pfm)
-    PersonalFinanceManager.view_financial_summary(pfm)
+    while True:
+        print("\nPersonal Finance Manager")
+        print("1. Log Expense")
+        print("2. Log Income")
+        print("3. View Financial Summary")
+        print("4. View Expenses by Category")
+        print("5. Manage Budget")
+        print("6. Manage Records")
+        print("7. Exit")
+
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            PersonalFinanceManager.input_expenses(pfm)
+        elif choice == "2":
+            PersonalFinanceManager.input_income(pfm)
+        elif choice == "3":
+            PersonalFinanceManager.view_financial_summary(pfm)
+        elif choice == "4":
+            PersonalFinanceManager.view_expenses_by_category(pfm)
+        elif choice == "5":
+            PersonalFinanceManager.manage_budget(pfm)
+        elif choice == "6":
+            PersonalFinanceManager.manage_records(pfm)
+        elif choice == "7":
+            break
+        else:
+            print("Invalid option. Please try again.")
 
 if __name__ == "__main__":
     main()
-
