@@ -1,0 +1,49 @@
+import unittest
+from datetime import date
+from project_PFM import PersonalFinanceManager
+
+class TestPersonalFinanceManager(unittest.TestCase):
+
+    def setUp(self):
+        """Create an instance of PersonalFinanceManager before each test."""
+        self.pfm = PersonalFinanceManager()
+
+    def test_log_expense(self):
+        """Test logging an expense."""
+        self.pfm.log_expense(100, "Groceries", "Food")
+        self.assertEqual(len(self.pfm.expenses), 1)
+        self.assertEqual(self.pfm.expenses[0], {'date': date.today(), 'amount': 100, 'name': "Groceries", 'category': "Food"})
+
+    def test_log_income(self):
+        """Test logging income."""
+        self.pfm.log_income(200, "Salary", "Job")
+        self.assertEqual(len(self.pfm.incomes), 1)
+        self.assertEqual(self.pfm.incomes[0], {'date': date.today(), 'amount': 200, 'name': "Salary", 'source': "Job"})
+
+    def test_get_financial_summary(self):
+        """Test financial summary calculation without currency conversion."""
+        self.pfm.log_expense(50, "Lunch", "Food")
+        self.pfm.log_income(200, "Salary", "Job")
+        expenses, income, net = self.pfm.get_financial_summary()
+        self.assertEqual(expenses, 50)
+        self.assertEqual(income, 200)
+        self.assertEqual(net, 150)
+
+    def test_add_update_budget(self):
+        """Test adding and updating a budget."""
+        self.pfm.add_budget("Entertainment", 150)
+        self.assertEqual(self.pfm.budgets["Entertainment"], 150)
+        self.pfm.update_budget("Entertainment", 200)
+        self.assertEqual(self.pfm.budgets["Entertainment"], 200)
+
+    def test_delete_record(self):
+        """Test deleting an expense and income record."""
+        self.pfm.log_expense(30, "Coffee", "Drinks")
+        self.pfm.log_income(300, "Freelancing", "Online")
+        self.pfm.delete_record("expense", "Coffee")
+        self.pfm.delete_record("income", "Freelancing")
+        self.assertEqual(len(self.pfm.expenses), 0)
+        self.assertEqual(len(self.pfm.incomes), 0)
+
+if __name__ == '__main__':
+    unittest.main()
